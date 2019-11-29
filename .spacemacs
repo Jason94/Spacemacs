@@ -33,10 +33,7 @@ values."
    '(
      markdown
      speed-reading
-     ;;javascript
-     purescript
-     scala
-     flow
+     javascript
      html
      ;;react
      ;; ----------------------------------------------------------------
@@ -63,8 +60,7 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
-   '(prettier-js
-     all-the-icons
+   '(all-the-icons
      all-the-icons-dired
      poet-theme
      )
@@ -342,10 +338,6 @@ you should place your code here."
     (yas-global-mode 1))
   ;; Git
   (spacemacs/set-leader-keys "g f f" 'magit-find-file)
-  ;; Prettier
-  (add-hook 'web-mode-hook 'prettier-js-mode)
-  (setq prettier-js-args '("--insert-pragma" "--require-pragma"))
-  (setq prettier-js-show-errors nil)
   ;; Ensime
   (setq ensime-startup-notification nil)
   (setq ensime-sem-high-faces
@@ -361,79 +353,7 @@ you should place your code here."
               (local-set-key (kbd "u") 'neotree-select-up-node)))
   ;; Graphics
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-  (add-hook 'purescript-mode-hook 'prettify-symbols-mode)
-  (add-hook 'purescript-mode-hook
-            (lambda ()
-              (setq prettify-symbols-alist
-                    '(("lambda" . ?λ)
-                      ("->" . ?→)
-                      ("->>" . ?↠)
-                      ("<-" . ?←)
-                      ("=>" . ?⇒)
-                      ("/=" . ?≠)
-                      ("!=" . ?≠)
-                      ("==" . ?≡)
-                      ("<=" . ?≤)
-                      (">=" . ?≥)
-                      ("<=<" . ?↢)
-                      (">=>" . ?↣)
-                      ("&&" . ?∧)
-                      ("||" . ?∨)
-                      ("forall" . ?∀)
-                      ("not" . ?¬)))))
-  ;; CCAP code gen
-  (load "~/.emacs.d/lisp/ccap-code-gen/ccap-temple-mode.el")
-  (add-to-list 'auto-mode-alist '("\\.tmpl\\'" . ccap-temple-mode))
-  (add-hook 'ccap-temple-mode-hook
-            #'(lambda ()
-                (setq
-                 ccap-temple-mode-codegen-repo
-                 "/home/jason/work/dev/purescript-ccap-codegen")))
-  (add-hook 'ccap-temple-mode-hook 'flycheck-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
- '(ccap-temple-mode-default-purs-target "Ccap.ExternalReports.Generated")
- '(ccap-temple-mode-default-scala-target "gov.wicourts.externalreports.generated")
- '(custom-safe-themes
-   (quote
-    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
- '(evil-want-Y-yank-to-eol nil)
- '(flycheck-javascript-flow-args nil)
- '(magit-blame-echo-style (quote headings))
- '(org-agenda-files (quote ("~/org/now.org")))
- '(package-selected-packages
-   (quote
-    (atom-one-dark-theme poet-theme all-the-icons-dired all-the-icons memoize mmm-mode markdown-toc markdown-mode gh-md prettier-js spray company-flow web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data powerline spinner hydra parent-mode projectile pkg-info epl flx highlight smartparens iedit evil goto-chg undo-tree f s dash bind-map bind-key packed helm avy helm-core async popup anzu flycheck-flow flow-minor-mode unfill mwim psci purescript-mode noflet flycheck-pos-tip pos-tip flycheck ensime sbt-mode scala-mode helm-company helm-c-yasnippet fuzzy company-tern dash-functional tern company-statistics company auto-yasnippet ac-ispell auto-complete org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot smeargle orgit magit-gitflow magit-popup helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit transient git-commit with-editor lv web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
- '(psc-ide-add-import-on-completion t)
- '(psc-ide-rebuild-on-save nil)
- '(safe-local-variable-values
-   (quote
-    ((js2-bounce-indent-p . t)
-     (java-indent-level . 4)
-     (groovy-indent-offset . 2)
-     (js-switch-indent-offset . 2)
-     (js-indent-level . 2))))
- '(safe-local-variable-valuesp
-   (quote
-    ((scala-indent:use-javadoc-style . t)
-     (js2-bounce-indent-p . t)
-     (java-indent-level . 4)
-     (groovy-indent-offset . 2)
-     (css-indent-offset . 2)
-     (js-switch-indent-offset . 2)
-     (js-indent-level . 2)))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
